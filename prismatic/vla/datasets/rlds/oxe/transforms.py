@@ -840,6 +840,12 @@ def libero_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
     trajectory["observation"]["gripper_state"] = trajectory["observation"]["state"][:, -2:]  # 2D gripper state
     return trajectory
 
+def xarm_vla_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
+
+    trajectory["observation"]["EEF_state"] = trajectory["observation"]["state"][:, :6]
+    trajectory["observation"]["gripper_state"] = trajectory["observation"]["state"][6]  # 2D gripper state
+    
+    return trajectory
 
 # === Registry ===
 OXE_STANDARDIZATION_TRANSFORMS = {
@@ -919,4 +925,5 @@ OXE_STANDARDIZATION_TRANSFORMS = {
     "libero_object_no_noops": libero_dataset_transform,
     "libero_goal_no_noops": libero_dataset_transform,
     "libero_10_no_noops": libero_dataset_transform,
+    "xarm_vla_dataset": xarm_vla_dataset_transform,
 }
