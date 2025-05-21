@@ -1,0 +1,15 @@
+NCCL_P2P_DISABLE="1" NCCL_IB_DISABLE="1" torchrun --standalone --nnodes 1 --nproc-per-node 2 \
+    vla-scripts/finetune.py \
+    --vla_path "openvla/openvla-7b" \
+    --data_root_dir VLA_Dataset \
+    --dataset_name xarm_vla_dataset \
+    --run_root_dir run_root_dir \
+    --adapter_tmp_dir adapter_dir \
+    --lora_rank 32 \
+    --batch_size 1 \
+    --grad_accumulation_steps 4 \
+    --image_aug True \
+    --save_steps 5000 \
+    --max_steps 10000 \
+    --wandb_project openvla \
+    --wandb_entity deniz6221
